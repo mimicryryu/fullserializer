@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FullSerializer {
     public static class fsJsonPrinter {
+        public static bool ESCAPE_UNICODE = true;
         /// <summary>
         /// Inserts the given number of indents into the builder.
         /// </summary>
@@ -27,7 +28,7 @@ namespace FullSerializer {
 
                 // unicode code point
                 int intChar = Convert.ToInt32(c);
-                if (intChar < 0 || intChar > 127) {
+                if (ESCAPE_UNICODE && (intChar < 0 || intChar > 127)) {
                     needsEscape = true;
                     break;
                 }
@@ -63,7 +64,7 @@ namespace FullSerializer {
 
                 // unicode code point
                 int intChar = Convert.ToInt32(c);
-                if (intChar < 0 || intChar > 127) {
+                if (ESCAPE_UNICODE && (intChar < 0 || intChar > 127)) {
                     result.Append(string.Format("\\u{0:x4} ", intChar).Trim());
                     continue;
                 }
