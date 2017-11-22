@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-public class TestCollection : KeyedCollection<TestEnum, TestClass> {
-    protected override TestEnum GetKeyForItem(TestClass item) {
-        return item == null ? TestEnum.Null : item.TestEnum;
+public class TestCollection : KeyedCollection<FSTestEnum, TestClass> {
+    protected override FSTestEnum GetKeyForItem(TestClass item) {
+        return item == null ? FSTestEnum.Null : item.TestEnum;
     }
 
-    public bool TryGetValue(TestEnum key, out TestClass item) {
+    public bool TryGetValue(FSTestEnum key, out TestClass item) {
         if (Dictionary == null) {
             item = default(TestClass);
             return false;
@@ -20,7 +20,7 @@ public class TestCollection : KeyedCollection<TestEnum, TestClass> {
     }
 }
 
-public enum TestEnum {
+public enum FSTestEnum {
     Null,
     Value1,
     Value2,
@@ -28,7 +28,7 @@ public enum TestEnum {
 }
 
 public class TestClass {
-    public TestEnum TestEnum { get; set; }
+    public FSTestEnum TestEnum { get; set; }
 }
 
 public class KeyedCollectionProvider : TestProvider<TestCollection> {
@@ -43,22 +43,22 @@ public class KeyedCollectionProvider : TestProvider<TestCollection> {
     public override IEnumerable<TestCollection> GetValues() {
         yield return new TestCollection();
         yield return new TestCollection {
-            new TestClass { TestEnum = TestEnum.Null }
+            new TestClass { TestEnum = FSTestEnum.Null }
         };
         yield return new TestCollection {
-            new TestClass { TestEnum = TestEnum.Null },
-            new TestClass { TestEnum = TestEnum.Value1 },
+            new TestClass { TestEnum = FSTestEnum.Null },
+            new TestClass { TestEnum = FSTestEnum.Value1 },
         };
         yield return new TestCollection {
-            new TestClass { TestEnum = TestEnum.Null },
-            new TestClass { TestEnum = TestEnum.Value1 },
-            new TestClass { TestEnum = TestEnum.Value2 },
+            new TestClass { TestEnum = FSTestEnum.Null },
+            new TestClass { TestEnum = FSTestEnum.Value1 },
+            new TestClass { TestEnum = FSTestEnum.Value2 },
         };
         yield return new TestCollection {
-            new TestClass { TestEnum = TestEnum.Null },
-            new TestClass { TestEnum = TestEnum.Value1 },
-            new TestClass { TestEnum = TestEnum.Value2},
-            new TestClass { TestEnum = TestEnum.Value3 },
+            new TestClass { TestEnum = FSTestEnum.Null },
+            new TestClass { TestEnum = FSTestEnum.Value1 },
+            new TestClass { TestEnum = FSTestEnum.Value2},
+            new TestClass { TestEnum = FSTestEnum.Value3 },
         };
     }
 }
