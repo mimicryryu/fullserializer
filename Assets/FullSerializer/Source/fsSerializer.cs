@@ -907,6 +907,7 @@ namespace FullSerializer {
         }
 
         private fsResult InternalDeserialize_4_Cycles(Type overrideConverterType, fsData data, Type resultType, ref object result) {
+            fsResult ret = InternalDeserialize_5_Converter(overrideConverterType, data, resultType, ref result); // #KDL Fix
             if (IsObjectDefinition(data)) {
                 // NOTE: object references are handled at stage 1
 
@@ -926,7 +927,8 @@ namespace FullSerializer {
             }
 
             // Nothing special, go through the standard deserialization logic.
-            return InternalDeserialize_5_Converter(overrideConverterType, data, resultType, ref result);
+            // return InternalDeserialize_5_Converter(overrideConverterType, data, resultType, ref result);
+            return ret;
         }
 
         private fsResult InternalDeserialize_5_Converter(Type overrideConverterType, fsData data, Type resultType, ref object result) {
